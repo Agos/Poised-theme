@@ -1,107 +1,99 @@
-/* http://modularscale.com/scale/?px1=16&px2=50&ra1=1.618&ra2=0 */
+/* Basic Body Structure - Sapientia 1.3 */
 
 * {
-	font-size: 100%;
 	margin: 0;
 	padding: 0;
+	font-size: 100%;
 	word-wrap: break-word;
+	text-shadow: 1px 1px rgba(255, 255, 255, 0.5);
 }
 
 body {
-	background-color: #d8d8d8;
-	background: url(Data/Resources/bg.png);
-	font-family: "Lucida Grande";
+	color: #000;
+	height: 100%;
+	z-index: 100;
 	font-size: 1em;
-    overflow: hidden;
+	overflow: hidden;
 	overflow-y: visible;
-	width: 100%;
-    height: 100%;
+	background-color: #d8d8d8;
+    background: url(Data/Resources/bg.png);
+	color: #000000;
+	font-family: "Lucida Grande";
 }
-
-/* Topic Bar */
-
-#topic_bar {
-	-webkit-box-sizing: border-box;
-	-webkit-box-shadow: inset 0 -1px 0px #777;
-	background-image: -webkit-linear-gradient(top, #5C636C, #474C53);
-	border-bottom: 1px solid #505050;
-	color: #ddd;
-	line-height: 1.5em;
-	opacity: 0.90;
-	padding: 0.618em;
-	text-shadow: 0px -1px #444;
-	width: 100%;
-	z-index: 10;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-}
-
-#topic_bar a {
-	color: #fff;
-	border-color: #fff;
-	text-shadow: 0px -1px #444;
-}
-
-#topic_bar a:hover {
-	color: #FFF;
-	border-color: #fff;
-	text-shadow: 0px 0px 4px rgba(255, 255, 255, 0.3);
-}
-
-/* Main Content */
 
 body div#body_home {
-	padding-top: 19.099px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	z-index: 100;
+	max-height: 99.99%;
+	position: absolute;
+	opacity: 0; /* Set by JavaScript */
+	-webkit-transition: opacity 0.8s linear;
 }
 
-body[type=channel] div#body_home {
+body[viewtype=channel] div#body_home {
 	max-height: 96.5%;
 }
 
-p {
+body .line {
+ 	margin-top: -1px;
+}
+
+body[dir=rtl] .sender {
+	display: inline-block;
+}
+
+/* Loading Screen */
+
+body div#loading_screen {
+	position:absolute; 
+	top: 50%;
+	left: 50%;
+	margin-top: -11px;
+	margin-left: -150px;
+	width: 300px;
+	height: 21px;
+	font-size: 18px;
 	color: #444;
-	clear: both;
-	line-height: 1.618em;
-	position: relative;
-	text-shadow: 0px 1px 0px white;
-	text-rendering: optimizeLegibility;
-}
-
-::selection {
-	background-color: #f357a1;
-	color: white;
-	text-shadow: 0px -1px 0px #DA3579;
-}
-
-#body_home div {
-	margin: 0 25.888px;
+	background: -webkit-linear-gradient(top, #e3e3e3 0%, #d8d8d8 100%);
+	border: 1px solid #999;
+	border-radius: 5px;
+	padding: 5px;
+	padding-left: 10px;
+	opacity: 1; /* Set by JavaScript */
+	-webkit-transition: opacity 0.8s linear;
 }
 
 /* Time */
 
-.time {
-	-webkit-transition: all 0.2s linear;
-	color: #999;
-	text-indent: 0;
-	word-wrap: normal;
-	white-space: nowrap
+body[dir=ltr] .time {
+	color: #888;
+	white-space: nowrap; 
+}
+
+body[dir=rtl] .time {
+	color: #888;
+	white-space: nowrap; 
+	padding-left: 0.4em;
 	display: inline-block;
 }
 
-.line:hover .time {
-	color: #444;
+/* Encryption Lock */
+
+.encryptionLock img {
+	float: right;
+	margin: 0;
+	padding: 0;
+	height: 11px;
+	margin-top: 2px;
+	padding-left: 10px;
 }
 
 /* Links */
 
 a {
-	-webkit-transition: all 0.2s linear;
 	color: #0080FF;
 	border-color: #0080FF;
 	text-decoration: none;
@@ -111,273 +103,537 @@ a {
 a:hover {
 	color: #40A0FF;
 	border-color: #40A0FF;
-	text-shadow: 0px 0px 6px rgba(196, 228, 255, 0.4);
+}
+
+/* Topic Bar */
+
+#topic_bar {
+    top: 0;
+	left: 0;
+	right: 0;
+	z-index: 400;
+	opacity: 0; /* Set by JavaScript */
+	color: #ddd;
+	position: fixed;
+	padding: 2px 0.5em 3px;
+	box-shadow: 0 1px 5px #777;
+	border-bottom: 1px solid #000;
+	text-shadow: 0px -1px #444;
+	background: -webkit-linear-gradient(top, #5C636C, #474C53);
+	-webkit-transition: opacity 0.8s linear;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+/* Topic bar hover additions contributed with permission from the project:
+	<https://github.com/hbang/Simplified-Light-Modifications> */
+
+#topic_bar:hover {
+	overflow: visible;
+	white-space: normal;
+}
+
+#topic_bar a, 
+#topic_bar span.channel {
+	color: #ddd;
+	border-color: #ddd;
+	text-shadow: 0px -1px #444;
 }
 
 /* Images */
 
-img {
-	border: 0;
+.inlineImageCell {
+	overflow: auto;
+	display: block;
+	margin-top: 15px;
+	margin-bottom: 12px;
 }
 
-img {
-	-webkit-background-clip: padding-box;
-	-webkit-border-radius: 7px;
-	-webkit-box-shadow: 0px -1px #ddd;
-	border: 1px solid #bbb;
-	display: block;
-	margin: 20px 0;
-	max-width: 95%;
+.inlineImageCell .image {
+	display: inline-block;
+	float: left;
+	margin-right: 12px;
+	margin-left: 10px;
+	min-width: 40px;
+	max-width: 90%;
+}
+
+.inlineImageCell .closeButton {
+	cursor: pointer;
+	border-radius: 5px;
+	border: 2px solid #444;
+	color: #444;
+	display: inline-block;
+	line-height: 14px;
+	font-size: 15px;
+	font-family: "Helvetica Neue" !important;
+	text-indent: 7px;
+	width: 16px;
+	height: 16px;
+	float: left;
+	padding-right: 7px;
+	padding-left: 0px;
+}
+
+html[systemversion^="10.9"] .inlineImageCell .closeButton,
+html[systemversion^="10.8"] .inlineImageCell .closeButton {
+	line-height: 13px;
 }
 
 /* Remember Line */
 
-#body_home div[id="mark"] {
+div[id=mark] {
 	-webkit-transition: 0.2s linear;
 	-webkit-box-shadow: 0px 1px 0px #fff;
 	border-bottom: 1px solid #b5b5b5;
 	margin: 5px 0;
 }
 
-#body_home div[type="join"] p,
-#body_home div[type="quit"] p,
-#body_home div[type="part"] p,
-div.event p
-{
-	color: #888;
+/* Historic Line */
+
+.historic {
+	opacity: 0.6;
 }
 
-/* Colors */
+html[systemversion^="10.9"] .historic,
+html[systemversion^="10.8"] .historic {
+	opacity: 0.6;
+	font-weight: normal;
+	-webkit-filter: none;
+}
 
-/* Nickname Colors */
+/* NOTICE/CTCP/WALLOPS */
 
-.sender, .inline_nickname {
+body div.line[ltype*=ctcp],
+body div.line[ltype*=notice],
+body div.line[ltype*=wallops] {
+	color: #f00;
+	z-index: 191;
+    background: #FFCCCD;
+	position: relative;
+	padding: 2px 5px 2px 5px;
+	border-bottom: 1px solid rgba(255, 0, 0, 0.3);
+}
+
+body div[ltype*=notice] .sender {
+	color: #f00;
 	font-weight: 700;
 }
 
-body div[type*=privmsg] .sender[type*=myself] { 
+/* Selected User Messages */
+
+.sender {
+	cursor: pointer;
+}
+
+body div.line[ltype*=privmsg]:not(.selectedUser),
+body div.line[ltype*=action]:not(.selectedUser) {
+    transition-property: border-top, border-bottom, background-color;
+	transition-duration: 0.5s, 0.5s, 0.5s;
+}
+
+body div.line[ltype*=privmsg] .time:not(.selectedUser),
+body div.line[ltype*=action] .time:not(.selectedUser) {
+    transition: color 0.5s;
+}
+
+body div.line.selectedUser[highlight=false] .time {
+    transition: color 0.5s ease-in;
+	color: #888;
+    line-height: 1.3em;
+}
+
+body div.line.selectedUser[highlight=false] {
+    transition-property: border-top, border-bottom, background-color;
+	transition-duration: 0.5s, 0.5s, 0.5s;
+
+  	z-index: 190;
+  	position: relative;
+	border-top: 1px solid rgb(122, 156, 177) !important;
+	border-bottom: 1px solid rgb(122, 156, 177) !important;
+  	background-color: rgba(123, 150, 194, 0.3) !important;
+}
+
+/* PRIVMSG */
+
+body div.line[ltype*=privmsg][highlight=false] {
+ 	padding: 2px 5px 2px 5px;
+	border-top: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	background-color: none;
+}
+
+body div.line[ltype*=privmsg][highlight=true],
+body div.line[ltype*=action][highlight=true] {
+  	z-index: 191;
+  	position: relative;
+	font-weight: normal;
+	padding: 2px 5px 2px 5px;
+	border-top: 1px solid #FFDB99;
+	border-bottom: 1px solid #FFDB99;
+	background-color: #FFE5B5 !important;
+}
+
+body div[ltype="privmsg"] .message {
+	color: #444;
+	clear: both;
+	position: relative;
+	text-shadow: 0px 1px 0px white;
+	text-rendering: optimizeLegibility;
+    line-height: 1.3em;
+}
+
+body div[ltype*=privmsg][mtype*=myself] .message {
+	color: #444;
+    line-height: 1.3em;
+}
+
+body div[ltype*=privmsg] .sender {
+	font-weight: 700;
+	white-space: pre-wrap;
+}
+
+/* ACTION */
+
+body div.line[ltype*=action] {
+ 	padding: 2px 5px 2px 5px;
+	border-top: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	background-color: none;
+}
+
+body div[ltype="action"] .message {
+	color: #000;
+}
+
+body div[ltype*=action] .sender {
+	font-weight: 700;
+}
+
+body div[ltype*=action][mtype*=myself] .sender,
+body div[ltype*=action][mtype*=myself] .message {
+	color: #B52CF6;
+}
+
+body[dir=ltr] div[ltype*=action] .sender:before {
+	content: "\2022";
+	margin-right: 0.4em;
+}
+
+body[dir=ltr] div[ltype*=action] .sender:after {
+	content: "";
+  	/* margin-right: 0.4em; */
+}
+
+body[dir=rtl] div[ltype*=action] .sender:before {
+	content: "\2022";
+	margin-left: 0.4em;
+}
+
+body[dir=rtl] div[ltype*=action] .sender:after {
+	content: "";
+  	/* margin-left: 0.4em; */
+}
+
+/* DEBUG/INVITE */
+
+body div.line[ltype*=invite],
+body div.line[ltype*=debug],
+body div.line[ltype*=rawhtml],
+body div.line[ltype*=dccfiletransfer] {
+	color: #777;
+	z-index: 190;
+	background: #eee;
+	position: relative;
+	padding: 2px 5px 2px 5px;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+
+/* Message of the Day (MOTD) */
+/* 720, 721, 722 are used by ShadowIRCd for Oper MOTD. */
+/* 372, 375, 376 are normal MOTD shared by several IRCds. */
+
+body div.line[command="372"],
+body div.line[command="721"] {
+	border: none;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+body div.line[command="375"],
+body div.line[command="720"] { /* Start. */
+	border-bottom: none;
+	padding-top: 2px;
+	padding-bottom: 3px;
+}
+
+body div.line[command="376"],
+body div.line[command="722"] { /* End. */
+	border-top: none;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+body div.line[command="372"] .message,
+body div.line[command="375"] .message,
+body div.line[command="376"] .message
+body div.line[command="720"] .message,
+body div.line[command="721"] .message,
+body div.line[command="722"] .message {
+	font-family: "Menlo" !important;
+}
+
+/* GENERAL EVENT */
+
+body div.line[ltype*=join],
+body div.line[ltype*=part],
+body div.line[ltype*=kick],
+body div.line[ltype*=quit],
+body div.line[ltype*=kill],
+body div.line[ltype*=nick],
+body div.line[ltype*=mode],
+body div.line[ltype*=topic],
+body div.line[ltype*=website] {
+ 	padding: 3px 5px 3px 5px;
+	color: #888;
+    line-height: 1.3em;
+}
+
+body[dir=ltr] div[ltype*=join] .message:before {
+	content: "→";
+  	color: #0c0;
+  	/* margin-right: 0.4em; */
+}
+
+body[dir=ltr] div[ltype*=kick] .message:before,
+body[dir=ltr] div[ltype*=part] .message:before,
+body[dir=ltr] div[ltype*=quit] .message:before {
+	content: "←";
+  	color: #e00;
+  	/* margin-right: 0.4em; */
+}
+
+body[dir=ltr] div[ltype*=nick] .message:before {
+	content: "•";
+  	color: #0c0;
+  	/* margin-right: 0.4em; */
+}
+
+body[dir=rtl] div[ltype*=join] .message:before {
+	content: "→";
+  	color: #0c0;
+  	/* margin-left: 0.4em; */
+}
+
+body[dir=rtl] div[ltype*=kick] .message:before,
+body[dir=rtl] div[ltype*=part] .message:before,
+body[dir=rtl] div[ltype*=quit] .message:before {
+	content: "←";
+  	color: #e00;
+  	/* margin-left: 0.4em; */
+}
+
+body[dir=rtl] div[ltype*=nick] .message:before {
+	content: "•";
+  	color: #0c0;
+  	/* margin-left: 0.4em; */
+}
+
+/* Nickname Colors */
+
+body .inline_nickname {
+	font-weight: 700;
+}
+
+body div[ltype*=privmsg] .sender[mtype*=myself] {
 	color: #ea0d68;
 	text-shadow: 0px 1px #FFDEEC;
 }
 
-.sender[type*=normal][colornumber='0'], 
-.inline_nickname[colornumber='0'] {
+body .sender[mtype*=normal][colornumber='0'],
+body .inline_nickname[colornumber='0'] {
 	color: #0080ff;
 	text-shadow: 0px 1px #CDE8FF;
 }
 
-.sender[type*=normal][colornumber='1'], 
-.inline_nickname[colornumber='1'] {
+body .sender[mtype*=normal][colornumber='1'],
+body .inline_nickname[colornumber='1'] {
 	color: #059005;
 	text-shadow: 0px 1px #CFFFD0;
 }
 
-.sender[type*=normal][colornumber='2'], 
-.inline_nickname[colornumber='2'] {
+body .sender[mtype*=normal][colornumber='2'],
+body .inline_nickname[colornumber='2'] {
 	color: #a80054;
 	text-shadow: 0px 1px #FFDFEF;
 }
 
-.sender[type*=normal][colornumber='3'], 
-.inline_nickname[colornumber='3'] {
+body .sender[mtype*=normal][colornumber='3'],
+body .inline_nickname[colornumber='3'] {
 	color: #9b0db1; 
 	text-shadow: 0px 1px #F9CFFF;
 }
 
-.sender[type*=normal][colornumber='4'], 
-.inline_nickname[colornumber='4'] {
+body .sender[mtype*=normal][colornumber='4'],
+body .inline_nickname[colornumber='4'] {
 	color: #108860;
 	text-shadow: 0px 1px #CEFFEF;
 }
 
-.sender[type*=normal][colornumber='5'], 
-.inline_nickname[colornumber='5'] {
+body .sender[mtype*=normal][colornumber='5'],
+body .inline_nickname[colornumber='5'] {
 	color: #7F4FFF;
 	text-shadow: 0px 1px #DAD0FF;
 }
 
-.sender[type*=normal][colornumber='6'], 
-.inline_nickname[colornumber='6'] {
+body .sender[mtype*=normal][colornumber='6'],
+body .inline_nickname[colornumber='6'] {
 	color: #58701a;
 	text-shadow: 0px 1px #F3FFCF;
 }
 
-.sender[type*=normal][colornumber='7'], 
-.inline_nickname[colornumber='7'] {
+body .sender[mtype*=normal][colornumber='7'],
+body .inline_nickname[colornumber='7'] {
 	color: #620a8e;
 	text-shadow: 0px 1px #EED0FF;
 }
 
-.sender[type*=normal][colornumber='8'], 
-.inline_nickname[colornumber='8'] {
+body .sender[mtype*=normal][colornumber='8'],
+body .inline_nickname[colornumber='8'] {
 	color: #BB0008;
 	text-shadow: 0px 1px #FFCFD1;
 }
 
-.sender[type*=normal][colornumber='9'], 
-.inline_nickname[colornumber='9'] {
+body .sender[mtype*=normal][colornumber='9'],
+body .inline_nickname[colornumber='9'] {
 	color: #44345f;
 	text-shadow: 0px 1px #DFD0FF;
 }
 
-.sender[type*=normal][colornumber='10'], 
-.inline_nickname[colornumber='10'] {
+body .sender[mtype*=normal][colornumber='10'],
+body .inline_nickname[colornumber='10'] {
 	color: #2f5353;
 	text-shadow: 0px 1px #CDFFFF;
 }
 
-.sender[type*=normal][colornumber='11'], 
-.inline_nickname[colornumber='11'] {
+body .sender[mtype*=normal][colornumber='11'],
+body .inline_nickname[colornumber='11'] {
 	color: #904000;
 	text-shadow: 0px 1px #FFE4CF;
 }
 
-.sender[type*=normal][colornumber='12'], 
-.inline_nickname[colornumber='12'] {
+body .sender[mtype*=normal][colornumber='12'],
+body .inline_nickname[colornumber='12'] {
 	color: #808000;
 	text-shadow: 0px 1px #FFFFCF;
 }
 
-.sender[type*=normal][colornumber='13'], 
-.inline_nickname[colornumber='13'] {
+body .sender[mtype*=normal][colornumber='13'],
+body .inline_nickname[colornumber='13'] {
 	color: #57797e;
 	text-shadow: 0px 1px #CDF9FF;
 }
 
-.sender[type*=normal][colornumber='14'], 
-.inline_nickname[colornumber='14'] {
+body .sender[mtype*=normal][colornumber='14'],
+body .inline_nickname[colornumber='14'] {
 	color: #3333dd;
 	text-shadow: 0px 1px #CDD0FF;
 }
 
-.sender[type*=normal][colornumber='15'], 
-.inline_nickname[colornumber='15'] {
+body .sender[mtype*=normal][colornumber='15'],
+body .inline_nickname[colornumber='15'] {
 	color: #5f4d22;
 	text-shadow: 0px 1px #FFF0CF;
 }
 
-.sender[type*=normal][colornumber='16'], 
-.inline_nickname[colornumber='16'] { 
+body .sender[mtype*=normal][colornumber='16'],
+body .inline_nickname[colornumber='16'] {
 	color: #706616;
 	text-shadow: 0px 1px #FFF9CF;
 }
 
-.sender[type*=normal][colornumber='17'], 
-.inline_nickname[colornumber='17'] { 
+body .sender[mtype*=normal][colornumber='17'],
+body .inline_nickname[colornumber='17'] {
 	color: #46799c;
 	text-shadow: 0px 1px #CDEDFF;
 }
 
-.sender[type*=normal][colornumber='18'], 
-.inline_nickname[colornumber='18'] { 
+body .sender[mtype*=normal][colornumber='18'],
+body .inline_nickname[colornumber='18'] {
 	color: #80372e;
 	text-shadow: 0px 1px #FFD4CF;
 }
 
-.sender[type*=normal][colornumber='19'], 
-.inline_nickname[colornumber='19'] { 
+body .sender[mtype*=normal][colornumber='19'],
+body .inline_nickname[colornumber='19'] {
 	color: #8F478E;
 	text-shadow: 0px 1px #FFCFFE;
 }
 
-.sender[type*=normal][colornumber='20'], 
-.inline_nickname[colornumber='20'] { 
+body .sender[mtype*=normal][colornumber='20'],
+body .inline_nickname[colornumber='20'] {
 	color: #5b9e4c;
 	text-shadow: 0px 1px #D8FFD0;
 }
 
-.sender[type*=normal][colornumber='21'], 
-.inline_nickname[colornumber='21'] { 
+body .sender[mtype*=normal][colornumber='21'],
+body .inline_nickname[colornumber='21'] {
 	color: #13826c;
 	text-shadow: 0px 1px #CDFFF6;
 }
 
-.sender[type*=normal][colornumber='22'], 
-.inline_nickname[colornumber='22'] { 
+body .sender[mtype*=normal][colornumber='22'],
+body .inline_nickname[colornumber='22'] {
 	color: #b13637;
 	text-shadow: 0px 1px #FFCFD0;
 }
 
-.sender[type*=normal][colornumber='23'], 
-.inline_nickname[colornumber='23'] { 
+body .sender[mtype*=normal][colornumber='23'],
+body .inline_nickname[colornumber='23'] {
 	color: #e45d59;
 	text-shadow: 0px 1px #FFD0CF;
 }
 
-.sender[type*=normal][colornumber='24'], 
-.inline_nickname[colornumber='24'] { 
+body .sender[mtype*=normal][colornumber='24'],
+body .inline_nickname[colornumber='24'] {
 	color: #1b51ae;
 	text-shadow: 0px 1px #CDE2FF;
 }
 
-.sender[type*=normal][colornumber='25'], 
-.inline_nickname[colornumber='25'] { 
+body .sender[mtype*=normal][colornumber='25'],
+body .inline_nickname[colornumber='25'] {
 	color: #4855ac;
-	text-shadow: 0px 1px #CDD7FF;
+    text-shadow: 0px 1px #FCCFFF;
 }
 
-.sender[type*=normal][colornumber='26'], 
-.inline_nickname[colornumber='26'] { 
+body .sender[mtype*=normal][colornumber='26'],
+body .inline_nickname[colornumber='26'] {
 	color: #7f1d86;
-	text-shadow: 0px 1px #FCCFFF;
+    text-shadow: 0px 1px #FCCFFF;
 }
 
-.sender[type*=normal][colornumber='27'], 
-.inline_nickname[colornumber='27'] { 
+body .sender[mtype*=normal][colornumber='27'],
+body .inline_nickname[colornumber='27'] {
 	color: #73643f;
-	text-shadow: 0px 1px #FFF1CF;
+    text-shadow: 0px 1px #FCCFFF;
 }
 
-.sender[type*=normal][colornumber='28'], 
-.inline_nickname[colornumber='28'] { 
+body .sender[mtype*=normal][colornumber='28'],
+body .inline_nickname[colornumber='28'] {
 	color: #0b9578;
-	text-shadow: 0px 1px #CDFFF5;
+    text-shadow: 0px 1px #FCCFFF;
 }
 
-.sender[type*=normal][colornumber='29'], 
-.inline_nickname[colornumber='29'] { 
+body .sender[mtype*=normal][colornumber='29'],
+body .inline_nickname[colornumber='29'] {
 	color: #569c96;
-	text-shadow: 0px 1px #CDFFFB;
+    text-shadow: 0px 1px #FCCFFF;
 }
 
-.sender[type*=normal][colornumber='30'], 
-.inline_nickname[colornumber='30'] { 
+body .sender[mtype*=normal][colornumber='30'],
+body .inline_nickname[colornumber='30'] {
 	color: #08465f;
-	text-shadow: 0px 1px #CDF2FF;
+    text-shadow: 0px 1px #FCCFFF;
 }
-
-/* mIRC Color Codes */
-
-.effect[color-number='0']  { color: #ffffff; }
-.effect[color-number='1']  { color: #000000; }
-.effect[color-number='2']  { color: #000088; }
-.effect[color-number='3']  { color: #008800; }
-.effect[color-number='4']  { color: #ff0000; }
-.effect[color-number='5']  { color: #880000; }
-.effect[color-number='6']  { color: #880088; }
-.effect[color-number='7']  { color: #ff8800; }
-.effect[color-number='8']  { color: #ffff00; }
-.effect[color-number='9']  { color: #00ff00; }
-.effect[color-number='10'] { color: #008888; }
-.effect[color-number='11'] { color: #00ffff; }
-.effect[color-number='12'] { color: #0000ff; }
-.effect[color-number='13'] { color: #ff00ff; }
-.effect[color-number='14'] { color: #888888; }
-.effect[color-number='15'] { color: #cccccc; }
-
-.effect[bgcolor-number='0']  { background-color: #ffffff; }
-.effect[bgcolor-number='1']  { background-color: #000000; }
-.effect[bgcolor-number='2']  { background-color: #000088; }
-.effect[bgcolor-number='3']  { background-color: #008800; }
-.effect[bgcolor-number='4']  { background-color: #ff0000; }
-.effect[bgcolor-number='5']  { background-color: #880000; }
-.effect[bgcolor-number='6']  { background-color: #880088; }
-.effect[bgcolor-number='7']  { background-color: #ff8800; }
-.effect[bgcolor-number='8']  { background-color: #ffff00; }
-.effect[bgcolor-number='9']  { background-color: #00ff00; }
-.effect[bgcolor-number='10'] { background-color: #008888; }
-.effect[bgcolor-number='11'] { background-color: #00ffff; }
-.effect[bgcolor-number='12'] { background-color: #0000ff; }
-.effect[bgcolor-number='13'] { background-color: #ff00ff; }
-.effect[bgcolor-number='14'] { background-color: #888888; }
-.effect[bgcolor-number='15'] { background-color: #cccccc; }
